@@ -134,9 +134,9 @@ none    0  0   395480  11267511 1/3    0/0   9563       0 CB   serde            
 (...)
 ```
 
-The actual output is using color to make the data more accessible.
+The actual output is colored to make the data more accessible.
 
-The of meaning of each column, and all the available options are
+The meaning of each column, and all the available options are
 described in the output of `cargo crev verify deps --help` command.
 
 Right now we will discuss just the most important columns.
@@ -192,7 +192,7 @@ $ cargo crev trust FYlr8YoYGVvDwHQxqEIs89reKKDy-oWisoO0qXXEfHE
 Error: User config not-initialized. Use `crev new id` to generate CrevID.
 ```
 
-Oops. That's right. You can't sign an *proof* until you have your own identity.
+Oops. That's right. You can't sign a *proof* until you have your own identity.
 
 ## Creating a `CrevID`
 
@@ -201,13 +201,14 @@ as your public *proof repository*. Go ahead, and create one on github, or whatev
 else your typically host your code. Customarily the repository should be called `crev-proofs`.
 
 Note: `cargo-crev` requires the master branch to already exist, so the repository you have created
-has to contains at least one existing commit.
+has to contains at least one existing commit. Creating a repo on https://github.com with a README
+will serve that purpose.
 
 Then run `cargo crev new id` like this:
 
 ```text
-$ cargo crev new id --url https://github.com/dpc/crev-proofs-test
-https://github.com/dpc/crev-proofs-test cloned to /home/dpc/.config/crev/proofs/Sp87YXeDKUyh4jImm23bCp1Gr-6eNkMoQogWbftNobQ
+$ cargo crev new id --url https://github.com/<your own account>/crev-proofs
+https://github.com/<your own account>/crev-proofs cloned to /home/dpc/.config/<your own account>/proofs/Sp87YXeDKUyh4jImm23bCp1Gr-6eNkMoQogWbftNobQ
 CrevID will be protected by a passphrase.
 There's no way to recover your CrevID if you forget your passphrase.
 Enter new passphrase: 
@@ -221,7 +222,7 @@ You can generate and use multiple IDs, but one is generally enough. Check your c
 
 ```text
 $ cargo crev query id current
-2CxdPgo2cbKpAfaPmEjMXJnXa7pdQGBBeGsgXjBJHzA https://github.com/dpc/crev-proofs-test
+2CxdPgo2cbKpAfaPmEjMXJnXa7pdQGBBeGsgXjBJHzA https://github.com/<your own account>/crev-proofs
 ```
 
 Now, back to creating *trust proof* for `dpc`.
@@ -286,7 +287,7 @@ comment: ""
 
 Editing the proof is modeled after editing a commit message through `git commit`.
 As you can see helpful documentation is available in the editor. Don't forget
-to read it at some point.
+to read it.
 
 When creating a *trust proof* you have to decide on the trust level,
 and optionally add a comment about the nature of this trust relationship.
@@ -314,9 +315,8 @@ We are trying to achieve an "impossible" here. We're not going to get much done 
 And we should use any help we can get.
 
 
-If it still makes you worry, just be aware that `cargo crev` provides a lot of ways to configure the effective trust calculation, including
-control over depth of the *Web of Trust* and redundancy level required. Also, the effective transitive trust level of `c` is always lower
-or equal to the direct trust level of `b`.
+If it still makes you worry, just be aware that `cargo crev` provides a lot of ways to configure the effective trust calculation, including control over depth of the *Web of Trust* and redundancy level required.
+Also, the effective transitive trust level of `c` is always lower or equal to the direct trust level of `b`.
 
 ## Fetching updates
 
@@ -346,7 +346,7 @@ Scan the output of `cargo crev verify deps` and pick a crate with low `lines` co
 review you want to start small and easy.
 
 
-At the moment of writting this `cargo crev` provides two methods of reviewing crate source code:
+At the moment of writting this, `cargo crev` provides two methods of reviewing crate source code:
 
 * for people prefering the command line and text editors like Vim, there's a `cargo crev goto` command
 * for IDE users `cargo crev open`
@@ -392,7 +392,7 @@ $ cargo crev open <crate> --cmd "code --wait -n" --cmd-save
 repeated every time. The exact `--cmd` to use for each IDE can vary, and you can ask for help in figuring it out
 on the `crev`'s gitter channel. 
 
-After reviewing the code use the standard `cargo crev review <cratename>` to create the *review proof*.
+After reviewing the code, use the standard `cargo crev review <cratename>` to create the *review proof*.
 
 ### Editing *review proof*
 
@@ -500,7 +500,7 @@ Congratulations!
 
 ## Publishing your *proofs*
 
-Every time you create a *proof* `crev` records it in a local copy of your *proof repository* associated with
+Every time you create a *proof*, `crev` records it in a local copy of your *proof repository* associated with
 your current `CrevID`.
 
 You can access this repository using `cargo crev git` command.
